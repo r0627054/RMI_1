@@ -31,6 +31,7 @@ public class RentalServer {
 
 		CrcData out = new CrcData();
 		int nextuid = 0;
+		
 		// open file
 		InputStream stream = MethodHandles.lookup().lookupClass().getClassLoader().getResourceAsStream(datafile);
 		if (stream == null) {
