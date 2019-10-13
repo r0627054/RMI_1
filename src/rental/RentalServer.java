@@ -16,8 +16,9 @@ import java.util.StringTokenizer;
 
 public class RentalServer {
 
-	private final static int LOCAL = 0;
-	private final static int REMOTE = 1;
+//	private final static int LOCAL = 0;
+//	private final static int REMOTE = 1;
+	
 	private final static String NAME = "Hertz";
 
 	public static void main(String[] args) throws ReservationException, NumberFormatException, IOException {
@@ -37,7 +38,7 @@ public class RentalServer {
 		Registry registry = LocateRegistry.getRegistry();
 		try {		
 			registry.bind(NAME, stub);
-			System.out.println(NAME + " running on rmi registry.\n Done!");
+			System.out.println(NAME + " running on rmi registry.\nDone!");
 		} catch (AlreadyBoundException e) {
 			e.printStackTrace();
 		}
