@@ -21,7 +21,7 @@ public class RentalServer {
 		// indicates whether the application is run on the remote setup or not.
 		int localOrRemote = (args.length == 1 && args[0].equals("REMOTE")) ? REMOTE : LOCAL;
 
-		CrcData data  = loadData("hertz.csv");
+		CrcData data = loadData("hertz.csv");
 		new CarRentalCompany(data.name, data.regions, data.cars);
 		
 	}
@@ -31,7 +31,6 @@ public class RentalServer {
 
 		CrcData out = new CrcData();
 		int nextuid = 0;
-
 		// open file
 		InputStream stream = MethodHandles.lookup().lookupClass().getClassLoader().getResourceAsStream(datafile);
 		if (stream == null) {
