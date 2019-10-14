@@ -1,10 +1,19 @@
 package client;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
+import rental.CarRentalCompany;
+import rental.CarType;
+import rental.ICarRentalCompany;
 import rental.Quote;
 import rental.Reservation;
+import rental.ReservationConstraints;
 
 public class Client extends AbstractTestBooking {
 
@@ -12,14 +21,11 @@ public class Client extends AbstractTestBooking {
 	 * MAIN *
 	 ********/
 
-	
-	
-	
-	
-	
-	
 	private final static int LOCAL = 0;
 	private final static int REMOTE = 1;
+
+	private final static String NAME = "Hertz";
+	private ICarRentalCompany icrc = null;
 
 	/**
 	 * The `main` method is used to launch the client application and run the test
@@ -28,12 +34,11 @@ public class Client extends AbstractTestBooking {
 	public static void main(String[] args) throws Exception {
 		// The first argument passed to the `main` method (if present)
 		// indicates whether the application is run on the remote setup or not.
-		int localOrRemote = (args.length == 1 && args[0].equals("REMOTE")) ? REMOTE : LOCAL;
-
-		String carRentalCompanyName = "Hertz";
+		// int localOrRemote = (args.length == 1 && args[0].equals("REMOTE")) ? REMOTE :
+		// LOCAL;
 
 		// An example reservation scenario on car rental company 'Hertz' would be...
-		Client client = new Client("simpleTrips", carRentalCompanyName, localOrRemote);
+		Client client = new Client("simpleTrips", NAME);
 		client.run();
 	}
 
@@ -41,10 +46,19 @@ public class Client extends AbstractTestBooking {
 	 * CONSTRUCTOR *
 	 ***************/
 
-	public Client(String scriptFile, String carRentalCompanyName, int localOrRemote) {
+	public Client(String scriptFile, String carRentalCompanyName) {
 		super(scriptFile);
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("TODO");
+		System.out.println("Client scriptfile loaded");
+
+		try {
+			Registry reg = LocateRegistry.getRegistry();
+			this.icrc = (ICarRentalCompany) reg.lookup(carRentalCompanyName);
+			System.out.println("ICarRentalCompany located in rmi registry! = " + this.icrc);
+
+		} catch (RemoteException | NotBoundException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -57,8 +71,11 @@ public class Client extends AbstractTestBooking {
 	 */
 	@Override
 	protected void checkForAvailableCarTypes(Date start, Date end) throws Exception {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("TODO");
+
+		Set<CarType> availableCarTypes = icrc.getAvailableCarTypes(start, end);
+		for (CarType car : availableCarTypes) {
+			System.out.println(car);
+		}
 	}
 
 	/**
@@ -76,8 +93,9 @@ public class Client extends AbstractTestBooking {
 	@Override
 	protected Quote createQuote(String clientName, Date start, Date end, String carType, String region)
 			throws Exception {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("TODO");
+		Quote result = icrc.createQuote(new ReservationConstraints(start, end, carType, region), clientName);
+		System.out.println("NEW QUOTE : " + result);
+		return result;
 	}
 
 	/**
@@ -90,8 +108,9 @@ public class Client extends AbstractTestBooking {
 	 */
 	@Override
 	protected Reservation confirmQuote(Quote quote) throws Exception {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("TODO");
+		Reservation result = icrc.confirmQuote(quote);
+		System.out.println("RESERVATION : " + result);
+		return result;
 	}
 
 	/**

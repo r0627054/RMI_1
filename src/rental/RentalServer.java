@@ -42,7 +42,7 @@ public class RentalServer {
 		} catch (AlreadyBoundException e) {
 			e.printStackTrace();
 		}
-
+		
 	}
 
 	public static CrcData loadData(String datafile) throws ReservationException, NumberFormatException, IOException {
