@@ -77,6 +77,7 @@ public class Client extends AbstractTestBooking {
 		for (CarType car : availableCarTypes) {
 			System.out.println(car);
 		}
+		System.out.println("\n\n");
 	}
 
 	/**
@@ -95,7 +96,7 @@ public class Client extends AbstractTestBooking {
 	protected Quote createQuote(String clientName, Date start, Date end, String carType, String region)
 			throws Exception {
 		Quote result = icrc.createQuote(new ReservationConstraints(start, end, carType, region), clientName);
-		System.out.println("NEW QUOTE : " + result);
+		System.out.println("NEW QUOTE : " + result + "\n");
 		return result;
 	}
 
@@ -110,7 +111,7 @@ public class Client extends AbstractTestBooking {
 	@Override
 	protected Reservation confirmQuote(Quote quote) throws Exception {
 		Reservation result = icrc.confirmQuote(quote);
-		System.out.println("RESERVATION : " + result);
+		System.out.println("RESERVATION : " + result+"\n");
 		return result;
 	}
 
@@ -129,6 +130,7 @@ public class Client extends AbstractTestBooking {
 		for (Reservation res : list) {
 			System.out.println("RESERVATION BY RENTER: " + res.getReservationInfo());
 		}
+		System.out.println("\n\n");
 
 		return list;
 	}

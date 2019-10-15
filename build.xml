@@ -44,8 +44,8 @@
 	<property name="local.registryPort" value="1099" />  <!-- Port to be used for `rmiregistry` started through Ant -->
 	<property name="remote.setupClass" value="client.RemoteSetup" />
 
-	<property name="csvFolder" value="." /> <!-- Folder that contains the `hertz.csv` file -->
-	<property name="testFolder" value="." /> <!-- Folder that contains the `simpleTrips` file -->
+	<property name="csvFolder" value="./src" /> <!-- Folder that contains the `hertz.csv` file -->
+	<property name="testFolder" value="./src" /> <!-- Folder that contains the `simpleTrips` file -->
 
 	<!--
     ********************************************************
