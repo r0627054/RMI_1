@@ -32,10 +32,11 @@ public class Client extends AbstractTestBooking {
 	 * script.
 	 */
 	public static void main(String[] args) throws Exception {
+		System.setSecurityManager(null);
+
 		// The first argument passed to the `main` method (if present)
 		// indicates whether the application is run on the remote setup or not.
-		// int localOrRemote = (args.length == 1 && args[0].equals("REMOTE")) ? REMOTE :
-		// LOCAL;
+		int localOrRemote = (args.length == 1 && args[0].equals("REMOTE")) ? REMOTE : LOCAL;
 
 		// An example reservation scenario on car rental company 'Hertz' would be...
 		Client client = new Client("simpleTrips", NAME);
@@ -71,8 +72,8 @@ public class Client extends AbstractTestBooking {
 	 */
 	@Override
 	protected void checkForAvailableCarTypes(Date start, Date end) throws Exception {
-
 		Set<CarType> availableCarTypes = icrc.getAvailableCarTypes(start, end);
+
 		for (CarType car : availableCarTypes) {
 			System.out.println(car);
 		}
@@ -123,8 +124,13 @@ public class Client extends AbstractTestBooking {
 	 */
 	@Override
 	protected List<Reservation> getReservationsByRenter(String clientName) throws Exception {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("TODO");
+		List<Reservation> list = icrc.getReservationsByRenter(clientName);
+
+		for (Reservation res : list) {
+			System.out.println("RESERVATION BY RENTER: " + res.getReservationInfo());
+		}
+
+		return list;
 	}
 
 	/**
@@ -137,7 +143,10 @@ public class Client extends AbstractTestBooking {
 	 */
 	@Override
 	protected int getNumberOfReservationsForCarType(String carType) throws Exception {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("TODO");
+		int amount = icrc.getNumberOfReservationsForCarType(carType);
+
+		System.out.println("AMOUNT OF RESERVATIONS: " + carType + " has " + amount + " reservations.");
+
+		return amount;
 	}
 }
