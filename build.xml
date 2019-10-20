@@ -19,7 +19,7 @@
 	<property name="server.package" value="rental" />  <!-- Server package --> 
 	<property name="server.mainClass" value="RentalServer" />  <!-- Main class of server package (contains client `main` method) -->
 	
-	<property name="zip.filename" value="rmi1.ADDFIRSTNAME.ADDLASTNAME" />  <!-- Name of zip file -->
+	<property name="zip.filename" value="rmi1.Dries.Janse" />  <!-- Name of zip file -->
 
 	<!--
     *************************************************************
@@ -27,12 +27,12 @@
 	   using the remote setup to test your application.	   
     ************************************************************* -->
 	
-	<property name="remote.endpoint" value="ENDPOINT_IP" />  <!-- Remote server: endpoint IP -->
-	<property name="remote.username" value="USERNAME" />  <!-- Remote server: username -->
-	<property name="remote.password" value="PASSWORD" />  <!-- Remote server: password -->
+	<property name="remote.endpoint" value="localhost:8081" />  <!-- Remote server: endpoint IP -->
+	<property name="remote.username" value="rmi097" />  <!-- Remote server: username -->
+	<property name="remote.password" value="USL85B4RKX" />  <!-- Remote server: password -->
 
-	<property name="remote.startRegistry" value="false" />  <!-- Remote server: start RMI registry or not -->
-	<property name="remote.registryPort" value="0" />  <!-- Remote server: on which port to start RMI registry -->
+	<property name="remote.startRegistry" value="true" />  <!-- Remote server: start RMI registry or not -->
+	<property name="remote.registryPort" value="10484" />  <!-- Remote server: on which port to start RMI registry -->
 
 	<!--
     ********************************************************
@@ -44,8 +44,8 @@
 	<property name="local.registryPort" value="1099" />  <!-- Port to be used for `rmiregistry` started through Ant -->
 	<property name="remote.setupClass" value="client.RemoteSetup" />
 
-	<property name="csvFolder" value="./src" /> <!-- Folder that contains the `hertz.csv` file -->
-	<property name="testFolder" value="./src" /> <!-- Folder that contains the `simpleTrips` file -->
+	<property name="csvFolder" value="." /> <!-- Folder that contains the `hertz.csv` file -->
+	<property name="testFolder" value="." /> <!-- Folder that contains the `simpleTrips` file -->
 
 	<!--
     ********************************************************

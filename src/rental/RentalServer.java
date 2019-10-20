@@ -34,8 +34,15 @@ public class RentalServer {
 
 		ICarRentalCompany iCompany = (ICarRentalCompany) UnicastRemoteObject.exportObject(company, 0);
 		System.out.println("Parsed into 'Remote' superclass...");
-
-		Registry registry = LocateRegistry.getRegistry();
+		
+		Registry registry;
+		
+		if(localOrRemote == 1) {
+			registry = LocateRegistry.getRegistry(10484);
+		}else {
+			registry = LocateRegistry.getRegistry();
+		}
+		
 		
 		try {
 			registry.rebind(NAME, iCompany);

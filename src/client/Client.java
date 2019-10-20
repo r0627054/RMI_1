@@ -39,7 +39,7 @@ public class Client extends AbstractTestBooking {
 		int localOrRemote = (args.length == 1 && args[0].equals("REMOTE")) ? REMOTE : LOCAL;
 
 		// An example reservation scenario on car rental company 'Hertz' would be...
-		Client client = new Client("simpleTrips", NAME);
+		Client client = new Client("simpleTrips", NAME, localOrRemote==1);
 		client.run();
 	}
 
@@ -47,12 +47,17 @@ public class Client extends AbstractTestBooking {
 	 * CONSTRUCTOR *
 	 ***************/
 
-	public Client(String scriptFile, String carRentalCompanyName) {
+	public Client(String scriptFile, String carRentalCompanyName, boolean remote) {
 		super(scriptFile);
 		System.out.println("Client scriptfile loaded");
 
 		try {
-			Registry reg = LocateRegistry.getRegistry();
+			Registry reg;
+			if(remote) {
+				reg =  LocateRegistry.getRegistry("spa.cs.kotnet.kuleuven.be",10484);
+			}else {
+				 reg = LocateRegistry.getRegistry();
+			}			
 			this.icrc = (ICarRentalCompany) reg.lookup(carRentalCompanyName);
 			System.out.println("ICarRentalCompany located in rmi registry! = " + this.icrc);
 
