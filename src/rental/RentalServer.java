@@ -22,7 +22,7 @@ public class RentalServer {
 	private final static String NAME = "Hertz";
 
 	public static void main(String[] args) throws ReservationException, NumberFormatException, IOException {
-		System.setSecurityManager(null);
+		//System.setSecurityManager(null);
 
 		// The first argument passed to the `main` method (if present)
 		// indicates whether the application is run on the remote setup or not.
@@ -32,13 +32,13 @@ public class RentalServer {
 		CarRentalCompany company = new CarRentalCompany(data.name, data.regions, data.cars);
 		System.out.println("Data loaded...");
 
-		ICarRentalCompany iCompany = (ICarRentalCompany) UnicastRemoteObject.exportObject(company, 0);
+		ICarRentalCompany iCompany = (ICarRentalCompany) UnicastRemoteObject.exportObject(company, 10482);
 		System.out.println("Parsed into 'Remote' superclass...");
 		
 		Registry registry;
 		
 		if(localOrRemote == 1) {
-			registry = LocateRegistry.getRegistry(10484);
+			registry = LocateRegistry.getRegistry(10481);
 		}else {
 			registry = LocateRegistry.getRegistry();
 		}

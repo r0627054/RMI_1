@@ -39,7 +39,7 @@ public class Client extends AbstractTestBooking {
 		int localOrRemote = (args.length == 1 && args[0].equals("REMOTE")) ? REMOTE : LOCAL;
 
 		// An example reservation scenario on car rental company 'Hertz' would be...
-		Client client = new Client("simpleTrips", NAME, localOrRemote==1);
+		Client client = new Client("simpleTrips", NAME, localOrRemote == 1);
 		client.run();
 	}
 
@@ -53,12 +53,13 @@ public class Client extends AbstractTestBooking {
 
 		try {
 			Registry reg;
-			if(remote) {
-				reg =  LocateRegistry.getRegistry("spa.cs.kotnet.kuleuven.be",10484);
-			}else {
-				 reg = LocateRegistry.getRegistry();
-			}			
+			if (remote) {
+				reg = LocateRegistry.getRegistry("127.0.0.1", 10481);
+			} else {
+				reg = LocateRegistry.getRegistry();
+			}
 			this.icrc = (ICarRentalCompany) reg.lookup(carRentalCompanyName);
+
 			System.out.println("ICarRentalCompany located in rmi registry! = " + this.icrc);
 
 		} catch (RemoteException | NotBoundException e) {
@@ -116,7 +117,7 @@ public class Client extends AbstractTestBooking {
 	@Override
 	protected Reservation confirmQuote(Quote quote) throws Exception {
 		Reservation result = icrc.confirmQuote(quote);
-		System.out.println("RESERVATION : " + result+"\n");
+		System.out.println("RESERVATION : " + result + "\n");
 		return result;
 	}
 
