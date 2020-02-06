@@ -1,5 +1,5 @@
 # Java RMI: Assignment 1
-KULeuven distributed systems --> RMI 1
+KULeuven Distributed Systems
 
 **Year**: 2019-2020 Master of Science in the Applied Informatics
 
